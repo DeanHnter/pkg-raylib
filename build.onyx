@@ -55,11 +55,23 @@ main :: () {
         os.exit(1);
     }
 
-    raylib_library := switch runtime.compiler_os {
-        case .Windows => ".\\raylib\\windows\\raylib.lib";
-        case .MacOS   => "./raylib/macos/libraylib.a";
-        case .Linux   => "./raylib/linux/libraylib.a";
+    raylib_library := "";
+    switch runtime.compiler_os {
+        case .Windows {
+          raylib_library =  ".\\raylib\\windows\\raylib.lib";
+        } 
+        case .MacOS {
+            if runtime.arch == .AARCH64 {
+                raylib_library = "./raylib/macos/aarch64/libraylib.a";
+            } else {
+                raylib_library = "./raylib/macos/libraylib.a";
+            }
+        }
+        case .Linux {
+            raylib_library = "./raylib/linux/libraylib.a";
+        }
     };
+
 
     flags := switch runtime.compiler_os {
         case .Windows => "";
