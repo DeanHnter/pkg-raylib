@@ -39,8 +39,8 @@ jobs:
         cd craylib
         mkdir build && cd build
         cmake -DPLATFORM=Desktop ..
-        make
-
+        cmake --build . --config Release
+        
     - name: Archive Production Artifacts
       uses: actions/upload-artifact@v2
       with:
