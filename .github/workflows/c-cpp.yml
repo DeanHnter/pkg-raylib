@@ -71,6 +71,7 @@ jobs:
 
     - name: Move raylib
       run: |
+        ls
         mv downloaded-artifacts/raylib-ubuntu-latest/libraylib.a raylib/linux/libraylib.a
         mv downloaded-artifacts/raylib-windows-latest/raylib.lib raylib/windows/raylib.lib
         mv downloaded-artifacts/raylib-macOS-latest/libraylib.a raylib/macos/libraylib.a
