@@ -37,13 +37,24 @@ jobs:
 
     - name: Build raylib
       run: |
+        mkdir artifacts
         cd craylib
         mkdir build && cd build
         cmake -DPLATFORM=Desktop ..
         cmake --build . --config Release
+
+    - name: Move library (Nix)
+      if: matrix.os == 'ubuntu-latest'
+      run: |
+        mv craylib/build/raylib/libraylib.a  artifacts/libraylib.a
+    
+    - name: Install Dependencies (Windows)
+      if: matrix.os == 'windows-latest'
+      run: |
+        mv craylib/build/raylib/Release/raylib.lib artifacts/raylib.lib
         
     - name: Archive Production Artifacts
       uses: actions/upload-artifact@v2
       with:
         name: raylib-${{ matrix.os }}
-        path: craylib/build/raylib
+        path: artifacts
