@@ -89,12 +89,13 @@ jobs:
         echo -e "\n\n\n" | sh <(curl https://get.onyxlang.io -sSfL)  # For simulating 3 Enter presses.
       
 
-    - name: onyx build
+    - name: Setup ONYX_PATH and add to PATH
       run: |
-        source /home/runner/.wasmer/wasmer.sh
         echo "ONYX_PATH=/home/runner/.onyx" >> $GITHUB_ENV
-        echo "$ONYX_PATH/bin" >> $GITHUB_PATH
-        echo "ONYX_PATH = $ONYX_PATH"
+        echo "/home/runner/.onyx/bin" >> $GITHUB_PATH
+        source /home/runner/.wasmer/wasmer.sh
+        echo "ONYX_PATH = ${ONYX_PATH}"
         onyx run --generate-foreign-info build.onyx
+      shell: bash
 
       
