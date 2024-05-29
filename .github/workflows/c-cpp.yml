@@ -7,7 +7,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-14-large, macos-14]
+        os: [ubuntu-latest, windows-latest, macos-13, macos-14]
     
     steps:
     - name: Checkout code
@@ -23,7 +23,7 @@ jobs:
         sudo apt-get install -y build-essential git cmake libasound2-dev mesa-common-dev libx11-dev libxrandr-dev libxi-dev xorg-dev libgl1-mesa-dev libglu1-mesa-dev libwayland-dev libxkbcommon-dev
 
     - name: Install Dependencies (macOS)
-      if: matrix.os == 'macos-14-large' || matrix.os == 'macos-14'
+      if: matrix.os == 'macos-13' || matrix.os == 'macos-14'
       run: |
         brew update
         brew install cmake
@@ -43,7 +43,7 @@ jobs:
         cmake --build . --config Release
 
     - name: Move library (Nix)
-      if: matrix.os == 'ubuntu-latest' || matrix.os == 'macos-14-large' || matrix.os == 'macos-14'
+      if: matrix.os == 'ubuntu-latest' || matrix.os == 'macos-13' || matrix.os == 'macos-14'
       run: |
         mv craylib/build/raylib/libraylib.a  artifacts/libraylib.a
         
@@ -80,7 +80,7 @@ jobs:
         mkdir -p raylib/macos/aarch64
         mv downloaded-artifacts/raylib-ubuntu-latest/libraylib.a raylib/linux/libraylib.a
         mv downloaded-artifacts/raylib-windows-latest/raylib.lib raylib/windows/raylib.lib
-        mv downloaded-artifacts/raylib-macos-14-large/libraylib.a raylib/macos/libraylib.a
+        mv downloaded-artifacts/raylib-macos-13/libraylib.a raylib/macos/libraylib.a
         mv downloaded-artifacts/raylib-macos-14/libraylib.a raylib/macos/aarch64/libraylib.a
 
     - name: Commit Library Files with Git LFS
