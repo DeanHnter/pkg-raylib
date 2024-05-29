@@ -60,6 +60,8 @@ jobs:
         path: artifacts
 
   build-onyx:
+    permissions:
+      contents: write
     needs: build-raylib
     runs-on: ubuntu-latest
     
