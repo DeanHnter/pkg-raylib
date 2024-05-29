@@ -88,10 +88,6 @@ jobs:
         # Set up Git identity
         git config --global user.name 'onyx-ci'
         git config --global user.email 'onyx-ci@onyxlang.io'
-        git lfs install
-        git lfs track "raylib/linux/libraylib.a"
-        git lfs track "raylib/windows/raylib.lib"
-        git lfs track "raylib/macos/libraylib.a"
         git add .gitattributes
         git add raylib/linux/libraylib.a raylib/windows/raylib.lib raylib/macos/libraylib.a
         git commit -m 'CI: Update raylib binaries'
