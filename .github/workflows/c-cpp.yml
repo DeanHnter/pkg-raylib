@@ -69,10 +69,14 @@ jobs:
       with:
         path: downloaded-artifacts
 
-
     - name: Move raylib
       run: |
-        cd downloaded-artifacts && ls
-        cd raylib-ubuntu-latest && ls && cd ..
-        cd raylib-windows-latest  && ls && cd ..
-        cd raylib-macOS-latest && ls && cd ..
+        cd downloaded-artifacts
+        mv raylib-ubuntu-latest/libraylib.a raylib/linux/libraylib.a
+        mv raylib-windows-latest/raylib.lib raylib/windows/raylib.lib
+        mv raylib-macOS-latest/libraylib.a raylib/macos/libraylib.a
+
+    - name: onyx build
+      run: |
+        onyx run --generate-foreign-info build.onyx
+      
