@@ -99,6 +99,7 @@ jobs:
 
         
         /home/runner/.onyx/bin/onyx run --generate-foreign-info build.onyx
+        /home/runner/.onyx/bin/onyx help
       shell: bash
 
       
