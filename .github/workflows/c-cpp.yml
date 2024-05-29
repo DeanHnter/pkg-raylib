@@ -78,6 +78,11 @@ jobs:
         mv downloaded-artifacts/raylib-windows-latest/raylib.lib raylib/windows/raylib.lib
         mv downloaded-artifacts/raylib-macOS-latest/libraylib.a raylib/macos/libraylib.a
 
+
+    - name: install wasmer
+      run: |
+        curl https://get.wasmer.io -sSfL | sh
+
     - name: onyx build
       run: |
         git clone https://github.com/onyx-lang/onyx --depth 1
