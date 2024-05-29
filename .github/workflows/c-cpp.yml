@@ -3,7 +3,7 @@ name: Build raylib
 on: workflow_dispatch
 
 jobs:
-  build:
+  build-raylib:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -58,3 +58,13 @@ jobs:
       with:
         name: raylib-${{ matrix.os }}
         path: artifacts
+
+  build-onyx:
+    needs: build-raylib
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Download all artifacts
+      uses: actions/download-artifact@v2
+      with:
+        path: downloaded-artifacts
