@@ -85,6 +85,7 @@ jobs:
 
     - name: onyx build
       run: |
+        source /home/runner/.wasmer/wasmer.sh
         git clone https://github.com/onyx-lang/onyx --depth 1
         cd onyx
         # Load settings used for compilation. Change these settings if you would like.
