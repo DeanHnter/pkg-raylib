@@ -44,7 +44,7 @@ jobs:
         cmake --build . --config Release
 
     - name: Move library (Nix)
-      if: matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest'
+      if: matrix.os == 'ubuntu-latest' || matrix.os == 'macOS-latest'
       run: |
         mv craylib/build/raylib/libraylib.a  artifacts/libraylib.a
     
