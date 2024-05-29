@@ -80,6 +80,12 @@ jobs:
 
     - name: onyx build
       run: |
-        sh <(curl https://get.onyxlang.io -sSfL)
-        /home/runner/.onyx/bin/onyx run --generate-foreign-info build.onyx
+        git clone https://github.com/onyx-lang/onyx --depth 1
+        cd onyx
+        # Load settings used for compilation. Change these settings if you would like.
+        source settings.sh
+        # Compile and install Onyx.
+        ./build.sh compile install
+        cd ..
+        rm -r onyx
       
