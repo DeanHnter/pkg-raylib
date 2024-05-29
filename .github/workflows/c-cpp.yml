@@ -74,11 +74,26 @@ jobs:
 
     - name: Move raylib
       run: |
+        mkdir -p raylib/linux/
+        mkdir -p raylib/windows/
+        mkdir -p raylib/macos/
         mv downloaded-artifacts/raylib-ubuntu-latest/libraylib.a raylib/linux/libraylib.a
         mv downloaded-artifacts/raylib-windows-latest/raylib.lib raylib/windows/raylib.lib
         mv downloaded-artifacts/raylib-macOS-latest/libraylib.a raylib/macos/libraylib.a
 
-
+    - name: Commit Library Files with Git LFS
+      run: |
+        # Set up Git identity
+        git config --global user.name 'onyx-ci'
+        git config --global user.email 'onyx-ci@onyxlang.io'
+        git lfs install
+        git lfs track "raylib/linux/libraylib.a"
+        git lfs track "raylib/windows/raylib.lib"
+        git lfs track "raylib/macos/libraylib.a"
+        git add .gitattributes
+        git add raylib/linux/libraylib.a raylib/windows/raylib.lib raylib/macos/libraylib.a
+        git commit -m 'CI: Update raylib binaries'
+        
     - name: install wasmer
       run: |
         curl https://get.wasmer.io -sSfL | sh
@@ -88,7 +103,6 @@ jobs:
         source /home/runner/.wasmer/wasmer.sh
         echo -e "\n\n\n" | sh <(curl https://get.onyxlang.io -sSfL)  # For simulating 3 Enter presses.
       
-
     - name: Setup ONYX_PATH and add to PATH
       run: |
         source /home/runner/.wasmer/wasmer.sh
@@ -96,10 +110,13 @@ jobs:
         echo "/home/runner/.onyx/bin" >> $GITHUB_PATH
         export ONYX_PATH="/home/runner/.onyx"
         export PATH="$ONYX_PATH/bin:$PATH"
-
-        
         /home/runner/.onyx/bin/onyx run --generate-foreign-info build.onyx
         /home/runner/.onyx/bin/onyx help
       shell: bash
 
-      
+    - name: Push Library Files with Git LFS to main
+      run: |
+        git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+        git push
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
