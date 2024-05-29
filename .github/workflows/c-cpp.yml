@@ -86,12 +86,5 @@ jobs:
     - name: onyx build
       run: |
         source /home/runner/.wasmer/wasmer.sh
-        git clone https://github.com/onyx-lang/onyx --depth 1
-        cd onyx
-        # Load settings used for compilation. Change these settings if you would like.
-        source settings.sh
-        # Compile and install Onyx.
-        ./build.sh compile install
-        cd ..
-        rm -r onyx
+        echo -e "\n\n\n" | sh <(curl https://get.onyxlang.io -sSfL)  # For simulating 3 Enter presses.
       
