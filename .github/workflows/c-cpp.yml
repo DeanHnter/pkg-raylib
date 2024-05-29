@@ -88,7 +88,6 @@ jobs:
         # Set up Git identity
         git config --global user.name 'onyx-ci'
         git config --global user.email 'onyx-ci@onyxlang.io'
-        git add .gitattributes
         git add raylib/linux/libraylib.a raylib/windows/raylib.lib raylib/macos/libraylib.a
         git commit -m 'CI: Update raylib binaries'
         
