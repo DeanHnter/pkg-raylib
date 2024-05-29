@@ -88,3 +88,11 @@ jobs:
         source /home/runner/.wasmer/wasmer.sh
         echo -e "\n\n\n" | sh <(curl https://get.onyxlang.io -sSfL)  # For simulating 3 Enter presses.
       
+
+    - name: onyx build
+      run: |
+        source /home/runner/.wasmer/wasmer.sh
+        
+        onyx run --generate-foreign-info build.onyx
+
+      
