@@ -81,7 +81,5 @@ jobs:
     - name: onyx build
       run: |
         sh <(curl https://get.onyxlang.io -sSfL)
-        echo "ONYX_PATH=/home/runner/.onyx" >> $GITHUB_ENV
-        echo "PATH=$ONYX_PATH/bin:$PATH" >> $GITHUB_ENV
-        onyx run --generate-foreign-info build.onyx
+        /home/runner/.onyx/bin/onyx run --generate-foreign-info build.onyx
       
