@@ -91,9 +91,13 @@ jobs:
 
     - name: Setup ONYX_PATH and add to PATH
       run: |
+        source /home/runner/.wasmer/wasmer.sh
         echo "ONYX_PATH=/home/runner/.onyx" >> $GITHUB_ENV
         echo "/home/runner/.onyx/bin" >> $GITHUB_PATH
-        source /home/runner/.wasmer/wasmer.sh
+        export ONYX_PATH="/home/runner/.onyx"
+        export PATH="$ONYX_PATH/bin:$PATH"
+
+        
         /home/runner/.onyx/bin/onyx run --generate-foreign-info build.onyx
       shell: bash
 
