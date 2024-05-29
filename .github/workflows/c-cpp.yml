@@ -92,7 +92,9 @@ jobs:
     - name: onyx build
       run: |
         source /home/runner/.wasmer/wasmer.sh
-        
+        echo "ONYX_PATH=/home/runner/.onyx" >> $GITHUB_ENV
+        echo "$ONYX_PATH/bin" >> $GITHUB_PATH
+        echo "ONYX_PATH = $ONYX_PATH"
         onyx run --generate-foreign-info build.onyx
 
       
