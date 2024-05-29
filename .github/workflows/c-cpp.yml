@@ -72,4 +72,8 @@ jobs:
 
     - name: Move raylib
       run: |
+        cd downloaded-artifacts && ls
+        unzip raylib-ubuntu-latest.zip
+        unzip raylib-windows-latest.zip
+        unzip raylib-macOS-latest.zip
         ls
