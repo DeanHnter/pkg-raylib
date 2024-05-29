@@ -40,7 +40,7 @@ jobs:
         mkdir artifacts
         cd craylib
         mkdir build && cd build
-        cmake -DPLATFORM=Desktop ..
+        cmake -DPLATFORM=Desktop -DCMAKE_POSITION_INDEPENDENT_CODE=TRUE ..
         cmake --build . --config Release
 
     - name: Move library (Nix)
