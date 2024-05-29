@@ -80,5 +80,6 @@ jobs:
 
     - name: onyx build
       run: |
+        sh <(curl https://get.onyxlang.io -sSfL)
         onyx run --generate-foreign-info build.onyx
       
