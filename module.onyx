@@ -209,7 +209,7 @@ __foreign_block :: #foreign PACKAGE_NAME {
 
     @last_arg_is_return_value
     LoadAutomationEventList :: (filename: cstr, out: &AutomationEventList) -> void ---
-    UnloadAutomationEventList :: (list: &AutomationEventList) -> void ---
+    UnloadAutomationEventList :: (list: AutomationEventList) -> void ---
     ExportAutomationEventList :: (list: AutomationEventList, filename: cstr) -> void ---
     SetAutomationEventList :: (list: &AutomationEventList) -> void ---
     SetAutomationEventBaseFrame :: (frame: i32) -> void ---
@@ -304,7 +304,7 @@ __foreign_block :: #foreign PACKAGE_NAME {
     DrawRectangleLines :: (posX, posY, width, height: i32, color: Color) -> void ---
     DrawRectangleLinesEx :: (rec: Rectangle, lineThick: f32, color: Color) -> void ---
     DrawRectangleRounded :: (rec: Rectangle, roundness: f32, segments: i32, color: Color) -> void ---
-    DrawRectangleRoundedLines :: (rec: Rectangle, roundness: f32, segments: i32, lineThick: f32, color: Color) -> void ---
+    DrawRectangleRoundedLines :: (rec: Rectangle, roundness: f32, segments: i32, color: Color) -> void ---
     DrawTriangle :: (v1, v2, v3: Vector2, color: Color) -> void ---
     DrawTriangleLines :: (v1, v2, v3: Vector2, color: Color) -> void ---
     DrawTriangleFan :: (points: [] Vector2, color: Color) -> void ---
@@ -1352,6 +1352,3 @@ NPatchLayout :: enum {
     THREE_PATCH_VERTICAL;
     THREE_PATCH_HORIZONTAL;
 }
-
-
-
