@@ -111,6 +111,16 @@ jobs:
         /home/runner/.onyx/bin/onyx help
       shell: bash
 
+    - name: Build Example
+      run: |
+        source /home/runner/.wasmer/wasmer.sh
+        echo "ONYX_PATH=/home/runner/.onyx" >> $GITHUB_ENV
+        echo "/home/runner/.onyx/bin" >> $GITHUB_PATH
+        export ONYX_PATH="/home/runner/.onyx"
+        export PATH="$ONYX_PATH/bin:$PATH"
+        /home/runner/.onyx/bin/onyx build examples/simple_window.onyx
+      shell: bash
+      
     - name: Push Library Files with Git LFS to main
       run: |
         git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
