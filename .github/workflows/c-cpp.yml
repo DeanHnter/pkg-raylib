@@ -112,29 +112,40 @@ jobs:
       run: |
         if [ "$RUNNER_OS" = "Linux" ]; then
           source /home/runner/.wasmer/wasmer.sh
+          echo "ONYX_PATH=/home/runner/.onyx" >> $GITHUB_ENV
+          echo "/home/runner/.onyx/bin" >> $GITHUB_PATH
+          export ONYX_PATH="/home/runner/.onyx"
+          export PATH="$ONYX_PATH/bin:$PATH"
+          /home/runner/.onyx/bin/onyx run --generate-foreign-info build.onyx
+          /home/runner/.onyx/bin/onyx help
         elif [ "$RUNNER_OS" = "macOS" ]; then
           source /Users/runner/.wasmer/wasmer.sh
+          echo "ONYX_PATH= /Users/runner/.onyx" >> $GITHUB_ENV
+          echo "/Users/runner/.onyx/bin" >> $GITHUB_PATH
+          export ONYX_PATH="/Users/runner/.onyx"
+          export PATH="$ONYX_PATH/bin:$PATH"
+          /Users/runner/.onyx/bin/onyx run --generate-foreign-info build.onyx
+          /Users/runner/.onyx/bin/onyx help        
         fi
-        echo "ONYX_PATH=/home/runner/.onyx" >> $GITHUB_ENV
-        echo "/home/runner/.onyx/bin" >> $GITHUB_PATH
-        export ONYX_PATH="/home/runner/.onyx"
-        export PATH="$ONYX_PATH/bin:$PATH"
-        /home/runner/.onyx/bin/onyx run --generate-foreign-info build.onyx
-        /home/runner/.onyx/bin/onyx help
       shell: bash
 
     - name: Onyx Build Example
       run: |
         if [ "$RUNNER_OS" = "Linux" ]; then
           source /home/runner/.wasmer/wasmer.sh
+          echo "ONYX_PATH=/home/runner/.onyx" >> $GITHUB_ENV
+          echo "/home/runner/.onyx/bin" >> $GITHUB_PATH
+          export ONYX_PATH="/home/runner/.onyx"
+          export PATH="$ONYX_PATH/bin:$PATH"
+          /home/runner/.onyx/bin/onyx build examples/simple_window.onyx
         elif [ "$RUNNER_OS" = "macOS" ]; then
           source /Users/runner/.wasmer/wasmer.sh
+          echo "ONYX_PATH= /Users/runner/.onyx" >> $GITHUB_ENV
+          echo "/Users/runner/.onyx/bin" >> $GITHUB_PATH
+          export ONYX_PATH="/Users/runner/.onyx"
+          export PATH="$ONYX_PATH/bin:$PATH"
+          /Users/runner/.onyx/bin/onyx build examples/simple_window.onyx      
         fi
-        echo "ONYX_PATH=/home/runner/.onyx" >> $GITHUB_ENV
-        echo "/home/runner/.onyx/bin" >> $GITHUB_PATH
-        export ONYX_PATH="/home/runner/.onyx"
-        export PATH="$ONYX_PATH/bin:$PATH"
-        /home/runner/.onyx/bin/onyx build examples/simple_window.onyx
       shell: bash
       
     - name: Push Library Files to main
