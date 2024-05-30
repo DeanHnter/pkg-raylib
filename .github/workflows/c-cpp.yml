@@ -99,14 +99,22 @@ jobs:
       run: |
         curl https://get.wasmer.io -sSfL | sh
 
-    - name: onyx build
+    - name: onyx setup
       run: |
-        source /home/runner/.wasmer/wasmer.sh
+        if [ "$RUNNER_OS" = "Linux" ]; then
+          source /home/runner/.wasmer/wasmer.sh
+        elif [ "$RUNNER_OS" = "macOS" ]; then
+          source /Users/runner/.wasmer/wasmer.sh
+        fi
         echo -e "\n\n\n" | sh <(curl https://get.onyxlang.io -sSfL)  # For simulating 3 Enter presses.
-      
-    - name: Setup ONYX_PATH and add to PATH
+        
+    - name: Onyx build package
       run: |
-        source /home/runner/.wasmer/wasmer.sh
+        if [ "$RUNNER_OS" = "Linux" ]; then
+          source /home/runner/.wasmer/wasmer.sh
+        elif [ "$RUNNER_OS" = "macOS" ]; then
+          source /Users/runner/.wasmer/wasmer.sh
+        fi
         echo "ONYX_PATH=/home/runner/.onyx" >> $GITHUB_ENV
         echo "/home/runner/.onyx/bin" >> $GITHUB_PATH
         export ONYX_PATH="/home/runner/.onyx"
@@ -115,9 +123,13 @@ jobs:
         /home/runner/.onyx/bin/onyx help
       shell: bash
 
-    - name: Build Example
+    - name: Onyx Build Example
       run: |
-        source /home/runner/.wasmer/wasmer.sh
+        if [ "$RUNNER_OS" = "Linux" ]; then
+          source /home/runner/.wasmer/wasmer.sh
+        elif [ "$RUNNER_OS" = "macOS" ]; then
+          source /Users/runner/.wasmer/wasmer.sh
+        fi
         echo "ONYX_PATH=/home/runner/.onyx" >> $GITHUB_ENV
         echo "/home/runner/.onyx/bin" >> $GITHUB_PATH
         export ONYX_PATH="/home/runner/.onyx"
