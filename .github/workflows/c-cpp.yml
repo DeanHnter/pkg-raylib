@@ -62,7 +62,10 @@ jobs:
     permissions:
       contents: write
     needs: build-raylib
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-13, macos-14]
     
     steps:
     - name: Checkout code
@@ -83,7 +86,8 @@ jobs:
         mv downloaded-artifacts/raylib-macos-13/libraylib.a raylib/macos/libraylib.a
         mv downloaded-artifacts/raylib-macos-14/libraylib.a raylib/macos/aarch64/libraylib.a
 
-    - name: Commit Library Files with Git LFS
+    - name: Commit Library Files
+      if: matrix.os == 'ubuntu-latest'
       run: |
         # Set up Git identity
         git config --global user.name 'onyx-ci'
@@ -121,7 +125,8 @@ jobs:
         /home/runner/.onyx/bin/onyx build examples/simple_window.onyx
       shell: bash
       
-    - name: Push Library Files with Git LFS to main
+    - name: Push Library Files to main
+      if: matrix.os == 'ubuntu-latest'
       run: |
         git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
         git push
