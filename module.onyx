@@ -135,7 +135,7 @@ __foreign_block :: #foreign PACKAGE_NAME {
     UnloadShader :: (shader: Shader) -> void ---
 
     @last_arg_is_return_value
-    GetMouseRay :: (mousePosition: Vector2, camera: Camera, out: &Ray) -> void ---
+    GetScreenToWorldRay :: (mousePosition: Vector2, camera: Camera, out: &Ray) -> void ---
     @last_arg_is_return_value
     GetCameraMatrix :: (camera: Camera, out: &Matrix) -> void ---
     @last_arg_is_return_value
