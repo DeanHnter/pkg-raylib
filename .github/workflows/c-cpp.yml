@@ -137,14 +137,18 @@ jobs:
           echo "/home/runner/.onyx/bin" >> $GITHUB_PATH
           export ONYX_PATH="/home/runner/.onyx"
           export PATH="$ONYX_PATH/bin:$PATH"
+          ls
           /home/runner/.onyx/bin/onyx build examples/simple_window.onyx
+          ls
         elif [ "$RUNNER_OS" = "macOS" ]; then
           source /Users/runner/.wasmer/wasmer.sh
           echo "ONYX_PATH= /Users/runner/.onyx" >> $GITHUB_ENV
           echo "/Users/runner/.onyx/bin" >> $GITHUB_PATH
           export ONYX_PATH="/Users/runner/.onyx"
           export PATH="$ONYX_PATH/bin:$PATH"
-          /Users/runner/.onyx/bin/onyx build examples/simple_window.onyx      
+          ls
+          /Users/runner/.onyx/bin/onyx build examples/simple_window.onyx
+          ls
         fi
       shell: bash
       
